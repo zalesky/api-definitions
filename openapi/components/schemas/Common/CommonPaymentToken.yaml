@@ -14,6 +14,15 @@ properties:
     readOnly: true
   method:
     type: string
+  paymentInstrumentId:
+    description: |
+      The payment instrument which is used as a base for the token.
+      Essentially, when specified, the token overrides the payment instrument with whatever is provided.
+      This is particularly useful when the token is used to do a payment,
+      so all the fields of a payment instrument are overridden for a single transaction.
+      Such token cannot be applied to a payment instrument.
+    allOf:
+      - $ref: ../ResourceId.yaml
   riskMetadata:
     allOf:
       - $ref: ../RiskMetadata.yaml
