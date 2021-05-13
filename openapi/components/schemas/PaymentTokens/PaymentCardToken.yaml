@@ -14,6 +14,15 @@ properties:
     description: The payment card instrument details.
     type: object
     properties:
+      id:
+        description: |
+          The payment card which is used as a base for the token.
+          Essentially, when specified, the token overrides the payment card with whatever is provided.
+          This is particularly useful when the token is used to do a payment,
+          so all the fields of the payment card are overridden for a single transaction.
+          Such token cannot be applied to a payment instrument.
+        allOf:
+          - $ref: ../ResourceId.yaml
       pan:
         description: Payment Card PAN (Primary Account Number).
         type: string
