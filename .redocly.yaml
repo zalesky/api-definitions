@@ -65,6 +65,7 @@ referenceDocs:
       - lang: Java
       - lang: Go
       - lang: Ruby
+      - lang: PHP
   schemaExpansionLevel: 2
   maxDisplayedEnumValues: 10
   showConsole: true
