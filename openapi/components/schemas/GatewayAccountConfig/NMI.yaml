@@ -1,27 +1,29 @@
 description: NMI Gateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      username:
-        type: string
-        description: NMI Gateway api token.
-      password:
-        type: string
-        description: NMI Gateway store ID.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - username
-      - password
-  settings:
-    type: object
+      - credentials
     properties:
-      disableStoredCredentials:
-        description: Disable NMI Stored Credentials (CIT/MIT).
-        type: boolean
-        default: false
-  threeDSecureServer:
-    $ref: ../ThreeDSecureServers/NMI3dsServers/NMI3dsServers.yaml
+      credentials:
+        type: object
+        properties:
+          username:
+            type: string
+            description: NMI Gateway api token.
+          password:
+            type: string
+            description: NMI Gateway store ID.
+            format: password
+        required:
+          - username
+          - password
+      settings:
+        type: object
+        properties:
+          disableStoredCredentials:
+            description: Disable NMI Stored Credentials (CIT/MIT).
+            type: boolean
+            default: false
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/NMI3dsServers/NMI3dsServers.yaml

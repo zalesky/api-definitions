@@ -1,23 +1,25 @@
 description: Paramount config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: Paramount credentials object.
-    properties:
-      merchant_id:
-        type: string
-        description: Merchant account ID.
-      merchant_pass:
-        type: string
-        description: Merchant account password.
-        format: password
-      payee:
-        type: string
-        description: Merchant name/descriptor.
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - merchant_id
-      - merchant_pass
-      - payee
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Paramount credentials object.
+        properties:
+          merchant_id:
+            type: string
+            description: Merchant account ID.
+          merchant_pass:
+            type: string
+            description: Merchant account password.
+            format: password
+          payee:
+            type: string
+            description: Merchant name/descriptor.
+        required:
+          - merchant_id
+          - merchant_pass
+          - payee

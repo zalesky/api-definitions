@@ -1,21 +1,23 @@
 description: NGenius config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: NGenius credentials object.
-    properties:
-      outletId:
-        type: string
-        description: NGenius outlet ID.
-      apiKey:
-        type: string
-        description: NGenius API key.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - outletId
-      - apiKey
-  threeDSecureServer:
-    $ref: ../ThreeDSecureServers/NGenius3dsServers/NGenius3dsServers.yaml
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: NGenius credentials object.
+        properties:
+          outletId:
+            type: string
+            description: NGenius outlet ID.
+          apiKey:
+            type: string
+            description: NGenius API key.
+            format: password
+        required:
+          - outletId
+          - apiKey
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/NGenius3dsServers/NGenius3dsServers.yaml

@@ -1,27 +1,29 @@
 description: Ingenico Gateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      merchantId:
-        type: string
-        description: Ingenico Gateway merchant ID.
-      apiKeyId:
-        type: string
-        description: Ingenico Gateway api key ID.
-      apiSecretKey:
-        type: string
-        description: Ingenico Gateway api secret key.
-        format: password
-      skipFraudService:
-        type: boolean
-        description: Ingenico skip fraud service.
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - merchantId
-      - apiKeyId
-      - apiSecretKey
-  threeDSecureServer:
-    $ref: ../ThreeDSecureServers/Ingenico3dsServers/Ingenico3dsServers.yaml
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantId:
+            type: string
+            description: Ingenico Gateway merchant ID.
+          apiKeyId:
+            type: string
+            description: Ingenico Gateway api key ID.
+          apiSecretKey:
+            type: string
+            description: Ingenico Gateway api secret key.
+            format: password
+          skipFraudService:
+            type: boolean
+            description: Ingenico skip fraud service.
+        required:
+          - merchantId
+          - apiKeyId
+          - apiSecretKey
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/Ingenico3dsServers/Ingenico3dsServers.yaml

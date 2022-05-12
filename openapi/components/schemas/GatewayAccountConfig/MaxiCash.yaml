@@ -1,19 +1,21 @@
 description: MaxiCash config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: MaxiCash credentials object.
-    properties:
-      merchantId:
-        type: string
-        description: MaxiCash API merchant ID.
-      password:
-        type: string
-        description: MaxiCash API password.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - merchantId
-      - password
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: MaxiCash credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: MaxiCash API merchant ID.
+          password:
+            type: string
+            description: MaxiCash API password.
+            format: password
+        required:
+          - merchantId
+          - password

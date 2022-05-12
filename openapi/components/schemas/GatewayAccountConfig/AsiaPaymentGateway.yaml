@@ -1,25 +1,27 @@
 description: AsiaPaymentGateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: AsiaPaymentGateway credentials object.
-    properties:
-      merchantNumber:
-        type: string
-        description: AsiaPaymentGateway merchant number.
-      secretKey:
-        type: string
-        description: AsiaPaymentGateway secret key for hash.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - merchantNumber
-      - secretKey
-  settings:
-    type: object
+      - credentials
     properties:
-      use3DSEndpoint:
-        type: boolean
-        description: Use 3DS endpoint.
+      credentials:
+        type: object
+        description: AsiaPaymentGateway credentials object.
+        properties:
+          merchantNumber:
+            type: string
+            description: AsiaPaymentGateway merchant number.
+          secretKey:
+            type: string
+            description: AsiaPaymentGateway secret key for hash.
+            format: password
+        required:
+          - merchantNumber
+          - secretKey
+      settings:
+        type: object
+        properties:
+          use3DSEndpoint:
+            type: boolean
+            description: Use 3DS endpoint.

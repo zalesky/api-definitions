@@ -1,22 +1,24 @@
 description: Zotapay Gateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      endpointId:
-        type: string
-        description: Zotapay's endpoint ID.
-      merchantId:
-        type: string
-        description: Zotapay's merchant ID.
-      merchantSecretKey:
-        type: string
-        description: Zotapay's merchant secret key.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - endpointId
-      - merchantId
-      - merchantSecretKey
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          endpointId:
+            type: string
+            description: Zotapay's endpoint ID.
+          merchantId:
+            type: string
+            description: Zotapay's merchant ID.
+          merchantSecretKey:
+            type: string
+            description: Zotapay's merchant secret key.
+            format: password
+        required:
+          - endpointId
+          - merchantId
+          - merchantSecretKey

@@ -1,5 +1,7 @@
 description: TestProcessor Gateway config.
-type: object
-properties:
-  threeDSecureServer:
-    $ref: ../ThreeDSecureServers/TestProcessor3dsServers/TestProcessor3dsServers.yaml
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
+    properties:
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/TestProcessor3dsServers/TestProcessor3dsServers.yaml

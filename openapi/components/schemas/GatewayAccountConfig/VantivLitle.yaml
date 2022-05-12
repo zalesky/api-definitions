@@ -1,24 +1,26 @@
 description: VantivLitle Gateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      username:
-        type: string
-        description: VantivLitle Gateway username.
-      password:
-        type: string
-        description: VantivLitle Gateway password.
-        format: password
-      merchantId:
-        type: string
-        description: VantivLitle Gateway merchant ID.
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - username
-      - password
-      - merchantId
-  threeDSecureServer:
-    $ref: ../ThreeDSecureServers/VantivLitle3dsServers/VantivLitle3dsServers.yaml
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          username:
+            type: string
+            description: VantivLitle Gateway username.
+          password:
+            type: string
+            description: VantivLitle Gateway password.
+            format: password
+          merchantId:
+            type: string
+            description: VantivLitle Gateway merchant ID.
+        required:
+          - username
+          - password
+          - merchantId
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/VantivLitle3dsServers/VantivLitle3dsServers.yaml

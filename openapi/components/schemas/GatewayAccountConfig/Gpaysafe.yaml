@@ -1,13 +1,15 @@
 description: Gpaysafe Gateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      apiKey:
-        type: string
-        description: Gpaysafe apiKey.
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - apiKey
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          apiKey:
+            type: string
+            description: Gpaysafe apiKey.
+        required:
+          - apiKey

@@ -1,24 +1,26 @@
 description: Rapyd config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: Rapyd credentials object.
-    properties:
-      accessKey:
-        type: string
-      secretKey:
-        type: string
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - accessKey
-      - secretKey
-  settings:
-    type: object
-    description: Rapyd settings object.
+      - credentials
     properties:
-      ipnUrl:
-        type: string
-        description: Ipn url set on Rapyd will be used to calculate signature.
+      credentials:
+        type: object
+        description: Rapyd credentials object.
+        properties:
+          accessKey:
+            type: string
+          secretKey:
+            type: string
+            format: password
+        required:
+          - accessKey
+          - secretKey
+      settings:
+        type: object
+        description: Rapyd settings object.
+        properties:
+          ipnUrl:
+            type: string
+            description: Ipn url set on Rapyd will be used to calculate signature.

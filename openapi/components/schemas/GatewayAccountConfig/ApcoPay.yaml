@@ -1,48 +1,50 @@
 description: ApcoPay config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: ApcoPay credentials object.
-    properties:
-      profileID:
-        type: string
-        description: ApcoPay profile ID.
-      secretWord:
-        type: string
-        description: ApcoPay secret word.
-        format: password
-      MerchantID:
-        type: string
-        description: ApcoPay merchant ID.
-      MerchantPassword:
-        type: string
-        description: ApcoPay merchant password.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - profileID
-      - secretWord
-      - MerchantID
-      - MerchantPassword
-  settings:
-    type: object
+      - credentials
     properties:
-      method:
-        type: string
-        description: ApcoPay's method.
-        enum:
-          - AFTERPAY
-          - BANCONTACT
-          - CREDITCLICK
-          - FLEXEPIN
-          - IDEAL
-          - JPAY
-          - OCTAPAY
-          - ONLINEUBERWEISEN
-          - ORIENTALWALLET
-          - VENUSPOINT
-          - ZIMPLER
-    required:
-      - method
+      credentials:
+        type: object
+        description: ApcoPay credentials object.
+        properties:
+          profileID:
+            type: string
+            description: ApcoPay profile ID.
+          secretWord:
+            type: string
+            description: ApcoPay secret word.
+            format: password
+          MerchantID:
+            type: string
+            description: ApcoPay merchant ID.
+          MerchantPassword:
+            type: string
+            description: ApcoPay merchant password.
+            format: password
+        required:
+          - profileID
+          - secretWord
+          - MerchantID
+          - MerchantPassword
+      settings:
+        type: object
+        properties:
+          method:
+            type: string
+            description: ApcoPay's method.
+            enum:
+              - AFTERPAY
+              - BANCONTACT
+              - CREDITCLICK
+              - FLEXEPIN
+              - IDEAL
+              - JPAY
+              - OCTAPAY
+              - ONLINEUBERWEISEN
+              - ORIENTALWALLET
+              - VENUSPOINT
+              - ZIMPLER
+        required:
+          - method

@@ -1,20 +1,22 @@
 description: Walpay Gateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      merchantName:
-        type: string
-        description: Walpay Gateway merchant name.
-      merchantPin:
-        type: string
-        description: Walpay Gateway merchant pin.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - merchantName
-      - merchantPin
-  threeDSecureServer:
-    $ref: ../ThreeDSecureServers/Walpay3dsServers/Walpay3dsServers.yaml
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantName:
+            type: string
+            description: Walpay Gateway merchant name.
+          merchantPin:
+            type: string
+            description: Walpay Gateway merchant pin.
+            format: password
+        required:
+          - merchantName
+          - merchantPin
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/Walpay3dsServers/Walpay3dsServers.yaml

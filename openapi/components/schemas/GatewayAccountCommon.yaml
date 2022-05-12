@@ -1,0 +1,180 @@
+type: object
+required:
+  - gatewayName
+  - method
+  - acceptedCurrencies
+properties:
+  id:
+    description: The gateway identifier string.
+    readOnly: true
+    allOf:
+      - $ref: ./ResourceId.yaml
+  gatewayName:
+    $ref: ./Gateways/GatewayName.yaml
+  acquirerName:
+    default: Other
+    allOf:
+      - $ref: ./Gateways/AcquirerName.yaml
+  method:
+    $ref: ./PaymentMethods/PaymentMethod.yaml
+  acceptedCurrencies:
+    description: Accepted currencies (array of the currency three letter codes).
+    type: array
+    items:
+      type: string
+  paymentCardSchemes:
+    description: Accepted payment card brands.
+    type: array
+    items:
+      $ref: ./PaymentCards/PaymentCardBrand.yaml
+  status:
+    description: The gateway account's status.
+    readOnly: true
+    type: string
+    enum:
+      - active
+      - inactive
+      - pending
+      - closed
+  merchantCategoryCode:
+    description: The gateway account's merchant category code.
+    type: string
+    pattern: '^[0-9]{4}$'
+    default: '0000'
+  dccMarkup:
+    description: Dynamic currency conversion markup in basis points.
+    type: integer
+    minimum: -10000
+    maximum: 10000
+  dccForceCurrency:
+    type: string
+    description: |
+      Force dynamic currency conversion to the specified currency on each sale.
+      Leave it empty to disable force DCC.
+  descriptor:
+    description: The gateway account's descriptor.
+    type: string
+  cityField:
+    description: The gateway account's city field (also known as line 2 descriptor).
+    type: string
+  excludedDccQuoteCurrencies:
+    description: Excluded Dynamic Currency Conversion Quote Currencies.
+    type: array
+    items:
+      type: string
+  monthlyLimit:
+    description: Monthly Limit.
+    type: number
+    format: double
+    minimum: 0
+  approvalWindowTtl:
+    description: >-
+      The time window (in seconds) allotted for approving an offsite
+      transaction before it is automatically `abandoned`.
+    type: integer
+    default: 3600
+    minimum: 300
+    maximum: 16777215
+  reconciliationWindowEnabled:
+    description: >-
+      If a transaction is not reconciled within the `reconciliationWindowTtl` time,
+      then the transaction is marked as `abandoned`.
+    type: boolean
+    default: false
+  reconciliationWindowTtl:
+    description: >-
+      The time window (in seconds) allotted for a reconciliation to occur.
+      If it is not reconciled in that time, then the transaction is marked as `abandoned`.
+    type: integer
+    minimum: 300
+    maximum: 16777215
+  threeDSecure:
+    description: True, if Gateway Account allows 3DSecure.
+    type: boolean
+    default: false
+  dynamicDescriptor:
+    description: True, if Gateway Account allows dynamic descriptor.
+    type: boolean
+    default: false
+  digitalWallets:
+    $ref: ./GatewayAccounts/DigitalWallets.yaml
+  isDown:
+    description: True if gateway is currently in downtime period.
+    type: boolean
+    readOnly: true
+  additionalFilters:
+    description: >
+      The additional filters are used to determine whether the gateway account
+      can be selected for the transaction to be processed.
+
+      For example, the filter may put a maximum amount value.
+      If the transaction is above that amount, this gateway account wouldn't be used.
+
+      This follows our standard filter format.
+    type: string
+    example: amount:1..100;bin:411111,444433
+  timeout:
+    description: Gateway Account request timeout in seconds.
+    type: integer
+    nullable: true
+    minimum: 10
+    maximum: 120
+  token:
+    description: Gateway Account token.
+    type: string
+    readOnly: true
+    example: TwiX3f92k4AiBE27BzTbQ38hHjicBz_w
+  sticky:
+    description: Customer's payment instrument will "stick" to the gateway account for future transactions when enabled.
+    type: boolean
+    default: true
+  setupInstruction:
+    type: string
+    default: do-nothing
+    description: |
+      Creates zero, one, or more child transactions such as `authorize` and `void`.
+      The transactions are linked to the `setup` transaction by the `parentTransactionId` relationship.
+    enum:
+      - authorize
+      - authorize-and-void
+      - sca
+      - do-nothing
+    x-enumDescriptions:
+      authorize: |
+        Creates an `authorize` transaction in the amount/currency of the request.
+        If the gateway account is configured for strong customer authentication, it will be used.
+      authorize-and-void: |
+        Creates an `authorize` transaction in the amount/currency of the request, followed by a `void` (if the `authorize` was approved).
+        If the gateway account is configured for strong customer authentication, it will be used.
+      sca: |
+        Uses strong customer authentication (SCA) without any `authorize` transaction.
+        SCA includes 3dsv2, 3ds, and some specific wallets behavior like setting up a billing agreement with PayPal.
+      do-nothing: |
+        Does nothing, and returns an approved `setup` transaction.
+        This is the default behavior.
+  createdTime:
+    description: Gateway Account created time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Gateway Account updated time.
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  organizationId:
+    deprecated: true
+    readOnly: true
+    description: Organization ID.
+    allOf:
+      - $ref: ./ResourceId.yaml
+  _links:
+    type: array
+    description: The links related to resource.
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/OnBoardingUrlLink.yaml
+        - $ref: ./Links/DynamicIpnLink.yaml
+        - $ref: ./Links/StaticIpnLink.yaml
+

@@ -1,31 +1,33 @@
 description: Piastrix config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: Piastrix credentials object.
-    properties:
-      shopId:
-        type: string
-        description: Shop ID.
-      secretKey:
-        type: string
-        description: Secret Key.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - shopId
-      - secretKey
-  settings:
-    type: object
-    description: Piastrix settings object.
+      - credentials
     properties:
-      tolerancePercentage:
-        type: integer
-        description: Tolerance percentage for settled amount.
-        minimum: 0
-        maximum: 5
-        example: 5
-  threeDSecureServer:
-    $ref: ../ThreeDSecureServers/Piastrix3dsServers/Piastrix3dsServers.yaml
+      credentials:
+        type: object
+        description: Piastrix credentials object.
+        properties:
+          shopId:
+            type: string
+            description: Shop ID.
+          secretKey:
+            type: string
+            description: Secret Key.
+            format: password
+        required:
+          - shopId
+          - secretKey
+      settings:
+        type: object
+        description: Piastrix settings object.
+        properties:
+          tolerancePercentage:
+            type: integer
+            description: Tolerance percentage for settled amount.
+            minimum: 0
+            maximum: 5
+            example: 5
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/Piastrix3dsServers/Piastrix3dsServers.yaml

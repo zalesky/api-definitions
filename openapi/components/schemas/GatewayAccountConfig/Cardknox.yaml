@@ -1,14 +1,16 @@
 description: Cardknox Gateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      xKey:
-        type: string
-        description: Cardknox xKey.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - xKey
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          xKey:
+            type: string
+            description: Cardknox xKey.
+            format: password
+        required:
+          - xKey

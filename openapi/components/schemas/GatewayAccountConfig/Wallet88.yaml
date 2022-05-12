@@ -1,19 +1,21 @@
 description: Wallet88 config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: Wallet88 credentials object.
-    properties:
-      username:
-        type: string
-        description: Wallet88 API user.
-      password:
-        type: string
-        description: Wallet88 API password.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - username
-      - password
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Wallet88 credentials object.
+        properties:
+          username:
+            type: string
+            description: Wallet88 API user.
+          password:
+            type: string
+            description: Wallet88 API password.
+            format: password
+        required:
+          - username
+          - password

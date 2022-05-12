@@ -1,19 +1,21 @@
 description: Prosa config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: Prosa credentials object.
-    properties:
-      entityId:
-        type: string
-      accessToken:
-        type: string
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - entityId
-      - accessToken
-  threeDSecureServer:
-    $ref: ../ThreeDSecureServers/Prosa3dsServers/Prosa3dsServers.yaml
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Prosa credentials object.
+        properties:
+          entityId:
+            type: string
+          accessToken:
+            type: string
+            format: password
+        required:
+          - entityId
+          - accessToken
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/Prosa3dsServers/Prosa3dsServers.yaml

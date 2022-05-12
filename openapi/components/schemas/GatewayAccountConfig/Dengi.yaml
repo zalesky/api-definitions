@@ -1,23 +1,25 @@
 description: Dengi Gateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      projectId:
-        type: string
-        description: Dengi Gateway project ID.
-      publicKey:
-        type: string
-        description: Dengi Gateway public key.
-        format: password
-      refundKey:
-        type: string
-        description: Dengi Gateway refund key.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - projectId
-      - publicKey
-      - refundKey
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          projectId:
+            type: string
+            description: Dengi Gateway project ID.
+          publicKey:
+            type: string
+            description: Dengi Gateway public key.
+            format: password
+          refundKey:
+            type: string
+            description: Dengi Gateway refund key.
+            format: password
+        required:
+          - projectId
+          - publicKey
+          - refundKey

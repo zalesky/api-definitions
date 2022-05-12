@@ -1,18 +1,20 @@
 description: EcorePay Gateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      accountId:
-        type: string
-        description: EcorePay Account ID.
-      accountAuth:
-        type: string
-        description: EcorePay Account Auth.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - accountId
-      - accountAuth
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          accountId:
+            type: string
+            description: EcorePay Account ID.
+          accountAuth:
+            type: string
+            description: EcorePay Account Auth.
+            format: password
+        required:
+          - accountId
+          - accountAuth

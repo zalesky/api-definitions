@@ -1,19 +1,21 @@
 description: Neosurf config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: Neosurf credentials object.
-    properties:
-      merchantId:
-        type: string
-        description: Neosurf merchant ID.
-      secretKey:
-        type: string
-        description: Neosurf API secret key.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - merchantId
-      - secretKey
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Neosurf credentials object.
+        properties:
+          merchantId:
+            type: string
+            description: Neosurf merchant ID.
+          secretKey:
+            type: string
+            description: Neosurf API secret key.
+            format: password
+        required:
+          - merchantId
+          - secretKey

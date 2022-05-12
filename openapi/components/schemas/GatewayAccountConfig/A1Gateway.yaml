@@ -1,21 +1,23 @@
 description: A1Gateway config.
-type: object
-  required:
-    - credentials
-  properties:
-    credentials:
-      type: object
-      description: A1Gateway credentials object.
-      properties:
-        accountId:
-          type: string
-          description: A1Gateway account ID.
-        password:
-          type: string
-          description: A1Gateway password.
-          format: password
-      required:
-        - accountId
-        - password
-    threeDSecureServer:
-      $ref: ../ThreeDSecureServers/A1Gateway3dsServers/A1Gateway3dsServers.yaml
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
+    required:
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: A1Gateway credentials object.
+        properties:
+          accountId:
+            type: string
+            description: A1Gateway account ID.
+          password:
+            type: string
+            description: A1Gateway password.
+            format: password
+        required:
+          - accountId
+          - password
+      threeDSecureServer:
+        $ref: ../ThreeDSecureServers/A1Gateway3dsServers/A1Gateway3dsServers.yaml

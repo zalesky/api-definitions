@@ -1,23 +1,25 @@
 description: Greenbox config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: Greenbox credentials object.
-    properties:
-      clientId:
-        type: string
-        description: Greenbox client ID.
-      locationId:
-        type: string
-        description: Greenbox location ID.
-      clientSecret:
-        type: string
-        description: Greenbox client secret.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - clientId
-      - clientSecret
-      - locationId
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Greenbox credentials object.
+        properties:
+          clientId:
+            type: string
+            description: Greenbox client ID.
+          locationId:
+            type: string
+            description: Greenbox location ID.
+          clientSecret:
+            type: string
+            description: Greenbox client secret.
+            format: password
+        required:
+          - clientId
+          - clientSecret
+          - locationId

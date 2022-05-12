@@ -1,22 +1,24 @@
 description: OnRamp config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: OnRamp credentials object.
-    properties:
-      apiKey:
-        type: string
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - apiKey
-  settings:
-    type: object
-    description: OnRamp settings object.
+      - credentials
     properties:
-      useServerToServerApi:
-        type: boolean
-        description: Use OnRamp server to server API.
-        default: false
+      credentials:
+        type: object
+        description: OnRamp credentials object.
+        properties:
+          apiKey:
+            type: string
+            format: password
+        required:
+          - apiKey
+      settings:
+        type: object
+        description: OnRamp settings object.
+        properties:
+          useServerToServerApi:
+            type: boolean
+            description: Use OnRamp server to server API.
+            default: false

@@ -1,14 +1,16 @@
 description: Circle config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: Circle credentials object.
-    properties:
-      apiKey:
-        type: string
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - apiKey
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Circle credentials object.
+        properties:
+          apiKey:
+            type: string
+            format: password
+        required:
+          - apiKey

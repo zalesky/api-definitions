@@ -1,23 +1,25 @@
 description: Redsys Gateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      merchantCode:
-        type: string
-        description: Redsys Gateway merchant code.
-        format: password
-      secretCode:
-        type: string
-        description: Redsys Gateway secret code.
-        format: password
-      sha256SecretCode:
-        type: string
-        description: Redsys Gateway merchant sha256 code. Required for Bizum payments.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - merchantCode
-      - secretCode
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantCode:
+            type: string
+            description: Redsys Gateway merchant code.
+            format: password
+          secretCode:
+            type: string
+            description: Redsys Gateway secret code.
+            format: password
+          sha256SecretCode:
+            type: string
+            description: Redsys Gateway merchant sha256 code. Required for Bizum payments.
+            format: password
+        required:
+          - merchantCode
+          - secretCode

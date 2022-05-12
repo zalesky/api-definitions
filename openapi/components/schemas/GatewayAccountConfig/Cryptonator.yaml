@@ -1,19 +1,21 @@
 description: Cryptonator config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    description: Cryptonator credentials object.
-    properties:
-      merchant_id:
-        type: string
-        description: Cryptonator merchant ID.
-      secret:
-        type: string
-        description: Cryptonator secret.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - merchant_id
-      - secret
+      - credentials
+    properties:
+      credentials:
+        type: object
+        description: Cryptonator credentials object.
+        properties:
+          merchant_id:
+            type: string
+            description: Cryptonator merchant ID.
+          secret:
+            type: string
+            description: Cryptonator secret.
+            format: password
+        required:
+          - merchant_id
+          - secret

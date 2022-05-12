@@ -1,19 +1,21 @@
 description: Dimoco config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      merchantId:
-        type: string
-      orderId:
-        type: string
-      password:
-        type: string
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - merchantId
-      - orderId
-      - password
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantId:
+            type: string
+          orderId:
+            type: string
+          password:
+            type: string
+            format: password
+        required:
+          - merchantId
+          - orderId
+          - password

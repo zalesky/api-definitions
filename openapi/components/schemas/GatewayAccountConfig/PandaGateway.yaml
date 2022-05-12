@@ -1,22 +1,24 @@
 description: Panda Gateway config.
-type: object
-required:
-  - credentials
-properties:
-  credentials:
-    type: object
-    properties:
-      merchantCode:
-        type: string
-        description: Panda Gateway merchant code.
-      apiCode:
-        type: string
-        description: Panda Gateway api code.
-      signKey:
-        type: string
-        description: Panda Gateway sign key.
-        format: password
+allOf:
+  - $ref: ../GatewayAccountCommon.yaml
+  - type: object
     required:
-      - merchantCode
-      - apiCode
-      - signKey
+      - credentials
+    properties:
+      credentials:
+        type: object
+        properties:
+          merchantCode:
+            type: string
+            description: Panda Gateway merchant code.
+          apiCode:
+            type: string
+            description: Panda Gateway api code.
+          signKey:
+            type: string
+            description: Panda Gateway sign key.
+            format: password
+        required:
+          - merchantCode
+          - apiCode
+          - signKey
